@@ -1,82 +1,67 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport"
-              content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>РискАналитик</title>
-        <link rel="stylesheet" href="../static/css/style.css">
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-    </head>
-    <body>
-        <div id="headerName"><h1>
-            <a href="{{ url_for('documents_page') }}">РискАналитик</a>
-        </h1></div>
+{% extends 'base.html' %}
 
-        <div id="topsidebar"><h1>
-    
-        </h1></div>
+{% block title %}РискАналитик{% endblock %}
+{% block javascript %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+    <script type="text/javascript">
+        {% if data %}
+            let data = {{ data|tojson }}
+        {% endif %}
+    </script>
+{% endblock %}
 
-        <div id="topFindSidebar"><h2>
-            <a href="{{ url_for('documents_page') }}">Поиск Дела</a>
-        </h2></div>
-
-        <div id="topHomeSidebar"><h2>
-            Помощь
-        </h2></div>
-
-        <div id="sidebar">
-            <form method="post" action="{{ url_for('documents_page') }}">
-                <div id="select-block">
-                    <h3>Категория</h3>
-                    <select id="select-category" name="cat_ids" class="form-select" size="3" aria-label="size 3 select example" multiple>
-                        {% for category in categories %}
-                            <option value="{{ category.id }}">{{ category.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
-
-                </div>
-
-                <div id="select-block">
-                    <h3>Требование</h3>
-                    <select id="select-req" name="req_id" class="form-select" size="10" aria-label="size 10 select example">
-                        {% for req in requirements %}
-                            <option value="{{ req.id }}">{{ req.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
-                </div>
-
-                <div id="select-block">
-                    <h3>Обстоятельства</h3>
-                    <select id="select-cond" name="cond_id" class="form-select" size="10" aria-label="size 10 select example">
-                        {% for cond in conditions %}
-                            <option value="{{ cond.id }}">{{ cond.name }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
-                </div>
-                <button class="button-75" role="button"><span class="text">Посмотреть статистику</span></button>
-
-            </form>
-        </div>
-        <div id="content">
-            <div class= "container">
-                <canvas id="statusChart"></canvas>       
+{% block body %}
+    <div id="headerName"><h1>
+        <a href="{{ url_for('documents_page') }}">РискАналитик</a>
+    </h1></div>
+    <div id="topsidebar"><h1>    
+    </h1></div>
+    <div id="topFindSidebar"><h2>
+        <a href="{{ url_for('documents_page') }}">Поиск Дела</a>
+    </h2></div>
+    <div id="topHomeSidebar"><h2>
+        Помощь
+    </h2></div>
+    <div id="sidebar">
+        <form method="post" action="{{ url_for('documents_page') }}">
+            <div id="select-block">
+                <h3>Категория</h3>
+                <select id="select-category" name="cat_ids" class="form-select" size="3" aria-label="size 3 select example" multiple>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
             </div>
+            <div id="select-block">
+                <h3>Требование</h3>
+                <select id="select-req" name="req_id" class="form-select" size="10" aria-label="size 10 select example">
+                    {% for req in requirements %}
+                        <option value="{{ req.id }}">{{ req.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+            </div>
+            <div id="select-block">
+                <h3>Обстоятельства</h3>
+                <select id="select-cond" name="cond_id" class="form-select" size="10" aria-label="size 10 select example">
+                    {% for cond in conditions %}
+                        <option value="{{ cond.id }}">{{ cond.name }}</option>
+                    {% endfor %}
+                </select>
+                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+            </div>
+            <button class="button-75" role="button"><span class="text">Посмотреть статистику</span></button>
+        </form>
+    </div>
+    <div id="content">
+        <div class= "container">
+            <canvas id="statusChart"></canvas>       
         </div>
-
-
-
-
-        <script type="text/javascript" src="{{ url_for('static', filename='js/statistics_script.js') }}"></script>
-        <script type="text/javascript" src="{{ url_for('static', filename='js/fill_selects.js') }}"></script>
-        <script src="../static/js/statistics_script.js"></script>
-        <script src="../static/js/fill_selects.js "></script>
-    </body>
-</html>
+    </div>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/statistics_script.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/fill_selects.js') }}"></script>
+    <script src="../static/js/statistics_script.js"></script>
+    <script src="../static/js/fill_selects.js "></script>
+{% endblock %}
