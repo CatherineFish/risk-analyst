@@ -22,7 +22,7 @@
         <canvas id="statusChart"></canvas>
     </div>
     <div id="topUnderStatSidebar">
-        <button class="button-75details" role="button"><span class="text">Подробнее</span></button>
+        <button class="button-75details" href="{{ url_for('index') }}" role="button"><span class="text">Подробнее</span></button>
     </div>
     <div id="sidebar">
         <form method="post" action="{{ url_for('documents_page') }}">
@@ -42,8 +42,9 @@
                         <option value="{{ req.id }}">{{ req.name }}</option>
                     {% endfor %}
                 </select>
-                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+                <button id="clear_selected_category" onclick="$('#select-req').prop('selectedIndex', -1);"   class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
             </div>
+
             <div id="select-block">
                 <h3>Обстоятельства</h3>
                 <select id="select-cond" name="cond_id" class="form-select" size="7" aria-label="size 7 select example">
@@ -51,8 +52,9 @@
                         <option value="{{ cond.id }}">{{ cond.name }}</option>
                     {% endfor %}
                 </select>
-                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+                <button class="button-75Cancel" onclick="$('#select-cond').prop('selectedIndex', -1);" role="button"><span class="text">Очистить выбор</span></button>
             </div>
+
             <div id="select-block">
                 <h3>Решение</h3>
                 <select id="select-solution" name="sol_id" class="form-select" size="3" aria-label="size 3 select example">
@@ -60,9 +62,9 @@
                         <option value="{{ solution.id }}">{{ solution.name.capitalize() }}</option>
                     {% endfor %}
                 </select>
-                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+                <button class="button-75Cancel" onclick="$('#select-solution').prop('selectedIndex', -1);" role="button"><span class="text">Очистить выбор</span></button>
             </div>
-            <button class="button-75Spec" role="button"><span class="text">Найти</span></button>
+            <button class="button-75Spec" id="searchButton" role="button"><span class="text">Найти</span></button>
         </form>
     </div>
     <div id="docContent">

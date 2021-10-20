@@ -32,7 +32,7 @@
                         <option value="{{ category.id }}">{{ category.name }}</option>
                     {% endfor %}
                 </select>
-                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+                <button class="button-75Cancel" id="clear_selected_category" role="button"><span class="text">Очистить выбор</span></button>
             </div>
             <div id="select-block">
                 <h3>Требование</h3>
@@ -41,7 +41,7 @@
                         <option value="{{ req.id }}">{{ req.name }}</option>
                     {% endfor %}
                 </select>
-                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+                <button class="button-75Cancel" onclick="$('#select-req').prop('selectedIndex', -1);" role="button"><span class="text">Очистить выбор</span></button>
             </div>
             <div id="select-block">
                 <h3>Обстоятельства</h3>
@@ -50,9 +50,9 @@
                         <option value="{{ cond.id }}">{{ cond.name }}</option>
                     {% endfor %}
                 </select>
-                <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+                <button class="button-75Cancel" onclick="$('#select-cond').prop('selectedIndex', -1);" role="button"><span class="text">Очистить выбор</span></button>
             </div>
-            <button class="button-75" role="button"><span class="text">Посмотреть статистику</span></button>
+            <button class="button-75" id="show_statistics_button" role="button"><span class="text">Посмотреть статистику</span></button>
         </form>
     </div>
     <div id="content">

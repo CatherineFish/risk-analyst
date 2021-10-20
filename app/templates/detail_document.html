@@ -19,28 +19,28 @@
             {% for doc in documents %}
             <li class="nav-item">
                 {% if doc.id == cur_doc.id and doc.instance == 1 %}
-                    <button class="button-75Active" role="button"><span class="text">Первая инстанция</span></button>
+                    <button class="button-75Active" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Первая инстанция</span></button>
                 {% endif %}
                 {% if doc.id == cur_doc.id and doc.instance == 2 %}
-                    <button class="button-75Active" role="button"><span class="text">Апелляция</span></button>
+                    <button class="button-75Active" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Апелляция</span></button>
                 {% endif %}
                 {% if doc.id == cur_doc.id and doc.instance == 3 %}
-                    <button class="button-75Active" role="button"><span class="text">Кассация</span></button>
+                    <button class="button-75Active" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Кассация</span></button>
                 {% endif %}
                 {% if doc.id == cur_doc.id and doc.instance == 4 %}
-                    <button class="button-75Active" role="button"><span class="text">Вторая кассация/Надзор</span></button>
+                    <button class="button-75Active" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Вторая кассация/Надзор</span></button>
                 {% endif %}
                 {% if doc.id != cur_doc.id and doc.instance == 1 %}
-                    <button class="button-75NonActive" role="button"><span class="text">Первая инстанция</span></button>
+                    <button class="button-75NonActive" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Первая инстанция</span></button>
                 {% endif %}
                 {% if doc.id != cur_doc.id and doc.instance == 2 %}
-                    <button class="button-75NonActive" role="button"><span class="text">Апелляция</span></button>
+                    <button class="button-75NonActive" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Апелляция</span></button>
                 {% endif %}
                 {% if doc.id != cur_doc.id and doc.instance == 3 %}
-                    <button class="button-75NonActive" role="button"><span class="text">Кассация</span></button>
+                    <button class="button-75NonActive" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Кассация</span></button>
                 {% endif %}
                 {% if doc.id != cur_doc.id and doc.instance == 4 %}
-                    <button class="button-75NonActive" role="button"><span class="text">Вторая кассация/Надзор</span></button>
+                    <button class="button-75NonActive" href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}" role="button"><span class="text">Вторая кассация/Надзор</span></button>
                 {% endif %}
             </li>
             {% endfor %}
