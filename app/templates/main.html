@@ -5,14 +5,14 @@
         <meta name="viewport"
               content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>Документы</title>
+        <title>РискАналитик</title>
         <link rel="stylesheet" href="../static/css/style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css">
         <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     </head>
     <body>
-        
         <div id="headerName"><h1>
             <a href="{{ url_for('documents_page') }}">РискАналитик</a>
         </h1></div>
@@ -20,6 +20,7 @@
         <div id="topsidebar"><h1>
     
         </h1></div>
+
         <div id="topFindSidebar"><h2>
             <a href="{{ url_for('documents_page') }}">Поиск Дела</a>
         </h2></div>
@@ -28,17 +29,6 @@
             Помощь
         </h2></div>
 
-
-        
-        <div id="topStatSidebar">
-            <canvas id="statusChart"></canvas>
-
-        </div>
-        <div id="topUnderStatSidebar">
-            <button class="button-75details" role="button"><span class="text">Подробнее</span></button>
-        </div>
-
-        
         <div id="sidebar">
             <form method="post" action="{{ url_for('documents_page') }}">
                 <div id="select-block">
@@ -49,11 +39,12 @@
                         {% endfor %}
                     </select>
                     <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
+
                 </div>
 
                 <div id="select-block">
                     <h3>Требование</h3>
-                    <select id="select-req" name="req_id" class="form-select" size="7" aria-label="size 7 select example">
+                    <select id="select-req" name="req_id" class="form-select" size="10" aria-label="size 10 select example">
                         {% for req in requirements %}
                             <option value="{{ req.id }}">{{ req.name }}</option>
                         {% endfor %}
@@ -63,51 +54,29 @@
 
                 <div id="select-block">
                     <h3>Обстоятельства</h3>
-                    <select id="select-cond" name="cond_id" class="form-select" size="7" aria-label="size 7 select example">
+                    <select id="select-cond" name="cond_id" class="form-select" size="10" aria-label="size 10 select example">
                         {% for cond in conditions %}
                             <option value="{{ cond.id }}">{{ cond.name }}</option>
                         {% endfor %}
                     </select>
                     <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
                 </div>
-
-                <div id="select-block">
-                    <h3>Решение</h3>
-                    <select id="select-solution" name="sol_id" class="form-select" size="3" aria-label="size 3 select example">
-                        {% for solution in solutions %}
-                            <option value="{{ solution.id }}">{{ solution.name.capitalize() }}</option>
-                        {% endfor %}
-                    </select>
-                    <button class="button-75Cancel" role="button"><span class="text">Очистить выбор</span></button>
-                </div>
-
-                <button class="button-75Spec" role="button"><span class="text">Найти</span></button>
+                <button class="button-75" role="button"><span class="text">Посмотреть статистику</span></button>
 
             </form>
         </div>
-
-        <div id="docContent">
+        <div id="content">
             <div class= "container">
-                <ul class="list-group">
-                    {% for doc in docs %}
-                        <li>{{ doc.id }}</li>
-                        <li class='list-group-item'>
-                            <div class="d-flex w-100 justify-content-between">
-                                <h5 class="mb-1">
-                                    <a href="{{ url_for('document_page', doc_id=doc.id.replace('/', '_')) }}">
-                                        {{ doc.id }}
-                                    </a>
-                                </h5>
-                            </div>
-                            <p class="mb-1">{{ doc.req_detail }}</p>
-                            <p class="mb-1">{{ doc.cond_detail }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
+                <canvas id="statusChart"></canvas>       
             </div>
         </div>
 
+
+
+
+        <script type="text/javascript" src="{{ url_for('static', filename='js/statistics_script.js') }}"></script>
         <script type="text/javascript" src="{{ url_for('static', filename='js/fill_selects.js') }}"></script>
         <script src="../static/js/statistics_script.js"></script>
+        <script src="../static/js/fill_selects.js "></script>
     </body>
 </html>

@@ -23,9 +23,9 @@ $( "#show_statistics_button" ).click(function() {
                         data.denied_percent
                     ],
                     backgroundColor: [
-                        "#32CD32",
-                        "#FFA420",
-                        "#F80000"
+                        "#C4E231",
+                        "#CC003D",
+                        "#FDAD35"
                     ]
                 }]
         };
